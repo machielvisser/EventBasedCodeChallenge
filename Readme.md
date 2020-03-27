@@ -52,4 +52,4 @@ To get an overview of the possible command run the CLI without input parameters.
 
 To register a user the following command can be used: `add -e user@domain.com -p password`\
 To indicate that the email has been verified: `verify -e user@domain.com`\
-To search for a user based on its email address: `search -q User@dom` -> will result in user@domain.com\
+To search for a user based on its email address: `search -q User@dom` -> will result in user@domain.com
