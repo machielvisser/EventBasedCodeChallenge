@@ -17,6 +17,10 @@ This library provides the following features:
 * Delete a user
 * Find registered users based on their email address (or a partial)
 
+The library provides 2 external facing interfaces:
+* UserRegistrationCommandService: Used to Change the data
+* UserRegistrationQueryService: Used to Query the data
+
 ### Register a user
 When a user is registered the resulting event is persisted in the event store, such that it can be queried later.
 The password is entered in plaintext, this should of course be improved by hashing the input immediately.
@@ -25,7 +29,6 @@ This is a complicated requirement because event sourcing does not provide immedi
 Here it is solved by introducing the UserRegistry aggregate that holds the index to the existing users.
 
 ### Update the email address of a registered user
-The goal of this feature is to update the email address of an already registered user.
 The same restriction as before applies here: the email address should be unique.
 Another restriction is: before the update becomes effective it should be verified.
 The verification is made possible by the library by providing functionality to indicate that the verification has been done.
@@ -41,12 +44,12 @@ But to do this reliably a message infrastructure with guaranteed delivery is req
 
 ### Find registered users based on the email address
 It should be possible to query users based on their email address or a part of it.
-Using the UserRegistry that was introduced for the uniqueness test a query find the users.
+Using the UserRegistry that was introduced for the uniqueness test a query to find the users.
 
 ## CLI
-The CLI provides a means of interacting with the library. In the repository the CLI uses mock instances for the event store and the key store.
+The CLI provides a means of interacting with the library. In the repository the CLI uses mock instances for the event store and the key store.\
 To get an overview of the possible command run the CLI without input parameters.
 
-To register a user the following command can be used: `add -e user@domain.com -p password`
-To indicate that the email has been verified: `verify -e user@domain.com`
-To search for a user based on its email address: `search -q User@dom` -> will result in user@domain.com
+To register a user the following command can be used: `add -e user@domain.com -p password`\
+To indicate that the email has been verified: `verify -e user@domain.com`\
+To search for a user based on its email address: `search -q User@dom` -> will result in user@domain.com\
